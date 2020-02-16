@@ -8,7 +8,6 @@
 
 void binaryConversion(char *binary);
 
-
 int main(int argc, char *argv[]){
 	int i, fd = 0, bCount = 0;
 	char buf[100];
