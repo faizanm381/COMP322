@@ -4,16 +4,17 @@
 #include <stddef.h>
 #include <ctype.h>
 #include <string.h>
-#include <stdlib.h> //pausing
+#include <stdlib.h>
 
 void binaryConversion(char *binary);
 
 int main(int argc, char *argv[]){
-	int i, fd = 0, bCount = 0;
+	int i, fd = 0, bCount = 0, inc = 0;
 	char buf[100];
+	char buf2[100];
 	char* tokenHolder[100];
 	char* reserve = NULL;
-	char* delims = " - ";
+	char* delims = " - / ";
 	char* a, * b, * sp = " - ";
 	
 	fd = open(argv[1], O_RDONLY);
@@ -55,15 +56,32 @@ int main(int argc, char *argv[]){
 	else{
 		read(fd, buf, 100);	
 		close(fd);
-		
+				
 		for(int k = 0; k < 100; k++){
 			if(buf[k] == ' '){
-				buf[k] = '-';
+				buf[k] = '-';	
 			}
 		}
-	}
+		
+		for(int k = 0; k < 100; k++){
+			if(buf[k] == '1' || buf[k] == '0'){
+				buf2[inc] = buf[k];
+				inc++;
+			}
+			else if(buf[k] == '-'){
+				buf2[inc++] = ' ';
+				buf2[inc++] = '/';
+				buf2[inc++] = ' ';
+			}
+		}
+		
+		buf2[inc-1] = '\0';
+		
+		strcpy(buf, buf2);
+	}	
 	
 	close(fd);
+
 				
 	printf("Original ASCII    Decimal  Parity\n");
 	printf("-------- -------- -------- --------\n");
@@ -90,10 +108,7 @@ void binaryConversion(char *binary){
 		char* mne[33] = {"NULL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "HT",
 		"LF", "VT", "FF", "CR", "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN",
 		"ETB", "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US", "SPACE"};
-		char* parResult = "";
-		
-		//printf("original %s\n", binaryHolder);
-		
+		char* parResult = "";		
 		
 		binaryLength = strlen(binaryHolder);
 
