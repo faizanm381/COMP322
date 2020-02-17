@@ -24,3 +24,8 @@ strtok_r but that still had the same issue. I tried pinpointing the issue and it
 elements should be handled with strcat/strncat (null terminator?). The program functions fine with regular input with 8 digits, but has 
 some inconsistency in lower digit values.
 
+(2/16/20)
+
+	I tried various inputs to see where the program messed up reading and found that adding a '-' to seperate the input would allow
+digits lower than 8 to be read into my binaryConversion(). So I replaced a space for '-' in my buf array to get around this issue.
+

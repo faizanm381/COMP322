@@ -13,8 +13,8 @@ int main(int argc, char *argv[]){
 	char buf[100];
 	char* tokenHolder[100];
 	char* reserve = NULL;
-	char* delims = " -";
-	char* a, * b, * sp = " ";
+	char* delims = " - ";
+	char* a, * b, * sp = " - ";
 	
 	fd = open(argv[1], O_RDONLY);
 	
@@ -55,12 +55,16 @@ int main(int argc, char *argv[]){
 	else{
 		read(fd, buf, 100);	
 		close(fd);
+		
+		for(int k = 0; k < 100; k++){
+			if(buf[k] == ' '){
+				buf[k] = '-';
+			}
+		}
 	}
 	
 	close(fd);
-		
-	printf("buf: %s\n", buf);
-		
+				
 	printf("Original ASCII    Decimal  Parity\n");
 	printf("-------- -------- -------- --------\n");
 		
@@ -88,7 +92,7 @@ void binaryConversion(char *binary){
 		"ETB", "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US", "SPACE"};
 		char* parResult = "";
 		
-		printf("original %s\n", binaryHolder);
+		//printf("original %s\n", binaryHolder);
 		
 		
 		binaryLength = strlen(binaryHolder);
