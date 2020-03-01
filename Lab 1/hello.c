@@ -5,18 +5,18 @@
 #include <unistd.h>
 #include <time.h>
 
+void printSysTime();
+
 int main () {
 	int stat; 
-	struct tms timeInfo;	
-	time_t stSeconds, enSeconds;
+	time_t stSeconds;
 
 	stSeconds = time(NULL);
    
 	printf("START: %ld\n", stSeconds);
    
     pid_t childpid = fork(); 
-    if (childpid == 0) 
-    { 
+    if (childpid == 0) { 
 		printf("PPID: %d, PID: %d, ", getppid(), getpid());
     }
 	else{
@@ -29,16 +29,21 @@ int main () {
 			printf("CPID: %d, RETVAL: %d\n", getppid(), retval);
 		}
 		
-		times(&timeInfo);
-	
-		printf("USER: %ld, SYS: %ld\n", timeInfo.tms_utime, timeInfo.tms_stime);
-		printf("CUSER: %ld, CSYS: %ld\n", timeInfo.tms_cutime, timeInfo.tms_cstime);
-	
-		enSeconds = time(NULL);
-   
-		printf("STOP: %ld\n", enSeconds);
-	
+		printSysTime();
 	}
+}
+
+
+void printSysTime(){
+	time_t enSeconds;
+	struct tms timeInfo;
 	
-	return(0);
+	times(&timeInfo);
+	
+	printf("USER: %ld, SYS: %ld\n", timeInfo.tms_utime, timeInfo.tms_stime);
+	printf("CUSER: %ld, CSYS: %ld\n", timeInfo.tms_cutime, timeInfo.tms_cstime);
+	
+	enSeconds = time(NULL);
+   
+	printf("STOP: %ld\n", enSeconds);
 }
