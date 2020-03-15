@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <time.h>
 
+void printRetVal(char* pName, int retval);
+
 int main (int argc, char *argv[]) {
 	int stat, nC = 0, io[2], cPid = 0; 	
 	char* newargv[] = { NULL };
@@ -39,8 +41,13 @@ int main (int argc, char *argv[]) {
 		
 		if(WIFEXITED(stat)){
 			int retval = WEXITSTATUS(stat);
-			fprintf(stderr, "%s: $? = %d\n", argv[1], retval);
+			printRetVal(argv[1], retval);
 		}
 		
 	}
+}
+
+
+void printRetVal(char* pName, int retval){
+	fprintf(stderr, "%s: $? = %d\n", pName, retval);
 }
