@@ -1,4 +1,4 @@
-Project Status: Complete
+Lab 3 Project Status: Complete
 
 Log/Progress Notes:
 
