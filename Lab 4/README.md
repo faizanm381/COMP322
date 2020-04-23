@@ -15,7 +15,7 @@ sem_close and sem_unlink at first, by realizing the mistake of forgetting destro
 
 Entry 2: Enforcing part 2 (4/23/20)
 
-	For the second part of the lab, I tried looking into critical section but it was confusing me, so I went with the circular wait 
+For the second part of the lab, I tried looking into critical section but it was confusing me, so I went with the circular wait 
 option recommeded in the lab where we would need to change the algorithm by creating new conditions for philosophers to dine without deadlock.
 I went with having left chopstick picked up first and then right chopstick. If there is no left/right chopstick available, the philosopher
 would have to wait for the others to finish. Only issue that I can't figure out is whether the the count of cycles is properly outputted.
