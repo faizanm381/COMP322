@@ -2,24 +2,18 @@ Project Status: Complete (Only completed part 1 and 2)
 
 Log/Progress Notes:
 
-Entry 1: Building part 1 (4/17/20) - (4/22/20)
+Entry 1: Part 1: Daemon Preparation (4/30/20)
 
-I started the assignment by building the program from the directions from part 1 of the lab and it was going pretty smooth. I had a
-hard time utilizing the semaphore functions and was confused on how they work. I watched a few videos on the significance of semaphores and
-why they are used which helped me grasped a better understanding that they allow processes to work and synchronization while following the
-rules of the program. I used a for loop to generate processes from fork to allow philsophers to spawn. Each process was able to output the
-think and eat functions respectively. I allocated a semaphore for chopsticks to allow philosophers to eat and the processes were 
-cooperating. I had issues where the processes would freeze and nothing would show up meaning I had errors in calling sem_wait(). There seems
-to be an issue where the first parameter of sem_open() (the name of the semaphore) would cause it to freeze if that same name is used
-multiple times. I learned that I didn't destroy the semaphore when signaling SIGTERM, which caused a memory leak. I only implemented
-sem_close and sem_unlink at first, by realizing the mistake of forgetting destroy, I learned it the hard way.
-
-Entry 2: Enforcing part 2 (4/23/20)
-
-For the second part of the lab, I tried looking into critical section but it was confusing me, so I went with the circular wait 
-option recommeded in the lab where we would need to change the algorithm by creating new conditions for philosophers to dine without deadlock.
-I went with having left chopstick picked up first and then right chopstick. If there is no left/right chopstick available, the philosopher
-would have to wait for the others to finish. Only issue that I can't figure out is whether the the count of cycles is properly outputted.
-Since I'm using cygwin, I can experiment with the SIGINT signal (CTRL+C) to end the program but the output is messy to understand whether
-the output is correct. SIGTERM kills all processes which I do not know how to issue in cygwin so hopefully all processes spawned by the
-fork are killed and display the count output properly.
+I start by reading through what daemons to learn about what this lab is about. Daemons are long-running processes with no control
+terminal, which might be challenging since I can't play around with it due to lack of interaction. I start the first part by constructing
+a daemon process through the instructions provided in the lab along with the specified functions. Closing the unneeded file descriptors,
+I used close() to get rid of the fds since its more simple to use than getrlimit(). After mimicing the daemon process, I move towards part
+2 of the assignment to handle signals and child processes and output the info towards lab6.log file created by program mole. I created
+signals to catch in daemon for SIGTERM, SIGUSR1, SIGUSR2. I made the pid childProcess1 & 2 to be declared static so process can be created
+in both the signalHandler() and in the daemon process. I wasn't sure if this would work since processes 1 and 2 are randomly spawned from 
+either USR1 or USR2 so I will use one pid to fork process when signaled. I created argv[] to store the program to run and the process 
+number so moles.c can append the data to the log file. I had pNum take the process number created by using the rand() to get either 
+process 1 or 2. I converted pNum to a char to store the process number into argv[] using sprintf() I had the child process fork when
+USR1 and USR2 are signaled and use execv() to run moles to output the poped moles from argv[] to the lab6.log file. I then created moles.c 
+to figure out whether the program creates/appends to the log file and it works as it writes the home directory "~/lab6.log". Signaling 
+SIGUSR1 and SIGUSR2 works and updates the log file with each mole popped.
