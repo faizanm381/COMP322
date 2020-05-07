@@ -3,6 +3,7 @@ Project Status: Complete (Only completed part 1 and 2)
 Log/Progress Notes:
 
 Entry 1: Building part 1 (4/17/20) - (4/22/20)
+
 I started the assignment by building the program from the directions from part 1 of the lab and it was going pretty smooth. I had a
 hard time utilizing the semaphore functions and was confused on how they work. I watched a few videos on the significance of semaphores and
 why they are used which helped me grasped a better understanding that they allow processes to work and synchronization while following the
