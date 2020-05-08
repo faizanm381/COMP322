@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-    FILE* fp = fopen("~/lab6.log", "a");
+    FILE* fp = fopen("./lab6.log", "a");
     if (fp != 0)
     {
 		fprintf(fp, "Pop mole %s\n", argv[argc]);
