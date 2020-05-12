@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
     FILE* fp = fopen("./lab6.log", "a");
     if (fp != 0)
     {
-		fprintf(fp, "Pop mole %s\n", argv[argc]);
+		fprintf(fp, "Pop mole %s\n", argv[argc-1]);
         fclose(fp);
     }
     return 0;
