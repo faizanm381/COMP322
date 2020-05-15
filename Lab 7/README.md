@@ -1,0 +1,7 @@
+Project Status: Incomplete 
+
+Log/Progress Notes:
+
+Entry 1: Creating Matrix (5/7/20 - 5/13/20)
+
+I started off by creating matrix_gen since it sounds easy to do. I initially created the matrix to a .txt file because I was not sure what matrix_file.size was in the usage example. Mentioned by others in slack, I realized that matrix_file.size was not a paremeter but a shell command to write to a file. I had to edit the matrix_gen code a little to output to the .size file instead of a .txt file. I next moved on to matrix_add and did the basic functions highlighted in the document; creating variables for block/size and time. I'm stumbled on how data from the matrix_file.size was being read into the program. Browsing various sites on how asynchronous functions are performed, the content was scarce and vague on how its being used. It took alot of time to understand how to work around with aio control blocks and learning the whether each of the component in the structure impacts the way it works. From aio's cb struct, I choose to modify the buffer (storing data), fd (i/o), number of bytes (# of bytes for i/o), and offset (distance) since these are vital components to passing information between blocks. I followed the code layout of the first part and tried to incorporate it into my code.
